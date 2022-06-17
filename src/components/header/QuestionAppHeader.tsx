@@ -4,15 +4,15 @@ import { Checkbox } from "../Checkbox";
 import { HeaderContainer } from "./styles";
 
 export const QuestionAppHeader = () => {
-    const questinDelayed = useAppSelector(getQuestionDelay);
+    const questionDelayed = useAppSelector(getQuestionDelay);
     const dispatch = useAppDispatch();
 
     const handleDelaySwitch = () => {
-        dispatch(switchQuestionDelay(!questinDelayed));
+        dispatch(switchQuestionDelay(!questionDelayed));
     }
 
     return (<HeaderContainer>
         <h2>The awesome Q/A tool</h2>
-        <Checkbox onCheck={handleDelaySwitch} label="Delay 2.5s" value={questinDelayed} />
+        <Checkbox onCheck={handleDelaySwitch} label="Delay 5s" value={questionDelayed} />
     </HeaderContainer>)
 }
