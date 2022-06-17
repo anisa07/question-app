@@ -24,11 +24,11 @@ export const QuestionItem = ({item, onEditItem, onDeleteItem}: QuestionItemProps
     }
 
     return (
-        <ItemContainer key={item.id} className="item">
+        <ItemContainer key={item.id} className="item" data-testid="item">
             <div className="question">
                 <p data-testid="question" onClick={handleAnswerVisibility}>{item.question}</p>
-                <button onClick={handleSelect} className="edit">Edit &#x270E;</button>
-                <button onClick={handleDelete} className="delete">Delete &#x2715;</button>
+                <button onClick={handleSelect} className="edit" data-testid="edit">Edit &#x270E;</button>
+                <button onClick={handleDelete} className="delete" data-testid="delete">Delete &#x2715;</button>
             </div>
             {isVisible && <p data-testid="answer" className="answer">{item.answer}</p>}
         </ItemContainer>

@@ -71,6 +71,7 @@ export const QuestionForm = ({item, onSubmit, onClearForm}: QuestionFormProps) =
         <form>
             <div className="item">
                 <Input
+                    data-testid="question"
                     name="question"
                     value={form.question.value}
                     label="Question"
@@ -81,6 +82,7 @@ export const QuestionForm = ({item, onSubmit, onClearForm}: QuestionFormProps) =
             </div>
             <div className="item">
                 <TextArea
+                    data-testid="answer"
                     name="answer"
                     value={form.answer.value}
                     label="Answer"

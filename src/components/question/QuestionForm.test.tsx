@@ -1,31 +1,12 @@
 import React from 'react';
-import {render, RenderResult, waitFor} from '@testing-library/react';
-import {QuestionList} from './QuestionList';
-import {Provider} from 'react-redux';
-import {store} from '../../store/store';
+import {render, RenderResult, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {sortQuestionList} from '../../helpers/quetionHelpers';
 import {QuestionForm} from './QuestionForm';
 
 describe('<QuestionForm />', () => {
     let wrapper: RenderResult;
-    let question: HTMLInputElement;
-    let answer: HTMLTextAreaElement;
-    let saveForm: HTMLButtonElement;
-    let resetForm: HTMLButtonElement;
-
     const spySubmit = jest.fn();
     const spyClear = jest.fn();
-
-    beforeEach(() => {
-        wrapper = render(
-            <QuestionForm onClearForm={spyClear} onSubmit={spySubmit}/>
-        );
-        question = document.querySelector('input[name="question"]') as HTMLInputElement;
-        answer = document.querySelector('textarea[name="answer"]') as HTMLTextAreaElement;
-        saveForm = document.querySelector('[data-testid="save-form"]') as HTMLButtonElement;
-        resetForm = document.querySelector('[data-testid="reset-form"]') as HTMLButtonElement;
-    });
 
     afterEach(() => {
         wrapper.unmount();
@@ -33,6 +14,14 @@ describe('<QuestionForm />', () => {
     });
 
     it('render question form', () => {
+        wrapper = render(
+            <QuestionForm onClearForm={spyClear} onSubmit={spySubmit}/>
+        );
+        const question = screen.getByTestId('question');
+        const answer = screen.getByTestId('answer');
+        const saveForm: HTMLButtonElement = screen.getByTestId('save-form');
+        const resetForm: HTMLButtonElement = screen.getByTestId('reset-form');
+
         expect(question).toBeTruthy();
         expect(answer).toBeTruthy();
         expect(question).toHaveValue("");
@@ -41,6 +30,12 @@ describe('<QuestionForm />', () => {
         expect(resetForm.disabled).toBeFalsy();
     });
     it('fill and submit form', async () => {
+        wrapper = render(
+            <QuestionForm onClearForm={spyClear} onSubmit={spySubmit}/>
+        );
+        const question = screen.getByTestId('question');
+        const answer = screen.getByTestId('answer');
+        const saveForm: HTMLButtonElement = screen.getByTestId('save-form');
         await userEvent.type(question, "New Question");
         await userEvent.type(answer, "New Answer");
         expect(saveForm.disabled).toBeFalsy();
@@ -54,15 +49,14 @@ describe('<QuestionForm />', () => {
         expect(saveForm.disabled).toBeTruthy();
     });
     it('edit item and submit form', async () => {
-        wrapper.unmount();
         wrapper = render(
             <QuestionForm onClearForm={spyClear} onSubmit={spySubmit} item={{
                 id: "123", answer: "Old Answer", question: "Old Question"
             }}/>
         );
-        question = document.querySelector('input[name="question"]') as HTMLInputElement;
-        answer = document.querySelector('textarea[name="answer"]') as HTMLTextAreaElement;
-        saveForm = document.querySelector('[data-testid="save-form"]') as HTMLButtonElement;
+        const question = screen.getByTestId('question');
+        const answer = screen.getByTestId('answer');
+        const saveForm: HTMLButtonElement = screen.getByTestId('save-form');
         expect(question).toHaveValue("Old Question");
         expect(answer).toHaveValue("Old Answer");
 
