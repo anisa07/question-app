@@ -3,6 +3,7 @@ This application allows to see and create questions and answers.
 By default, answers are hidden and could be seen by clicking on questions.
 A user can manage questions delete, sort, edit.
 The application prompts how many question and what sections it has. It also allows to simulate update question list delay.
+<img src="https://github.com/anisa07/question-app/blob/main/gitPics/questionList.png" />
 
 ## Available Scripts
 
