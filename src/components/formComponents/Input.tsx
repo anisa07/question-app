@@ -7,14 +7,16 @@ export interface InputProps {
     error: boolean,
     errorMessage: string,
     label?: string,
+    dataTestId?: string,
     onChange: (v: ChangeEvent<HTMLInputElement>) => void,
 }
 
-export const Input = ({value, name, errorMessage, error, onChange, label}: InputProps) => {
+export const Input = ({value, name, errorMessage, error, onChange, label, dataTestId}: InputProps) => {
     return (
         <div>
             <p>{label}</p>
             <StyledInput
+                data-testid={dataTestId}
                 error={error}
                 value={value}
                 name={name}

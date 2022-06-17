@@ -23,6 +23,12 @@ describe('<QuestionList />', () => {
         expect(screen.getAllByTestId('item').length).toBe(2);
     });
     it('sort question list', async () => {
+        wrapper = render(
+            <Provider store={store}>
+                <QuestionList />
+            </Provider>
+        );
+
         const questionList = store.getState().question.questionList;
 
         const getQuestions = () => Array.from(screen.getAllByTestId('question')).map((item: Element) => item.textContent);
@@ -36,9 +42,15 @@ describe('<QuestionList />', () => {
         expect(screen.getByText('Undo sort questions')).toBeTruthy();
     });
     it('delete question list', async () => {
+        wrapper = render(
+            <Provider store={store}>
+                <QuestionList />
+            </Provider>
+        );
+
         expect(screen.getAllByTestId('item').length).toBe(2);
         await userEvent.click(screen.getByTestId("delete-questions"));
-        expect(screen.getAllByTestId('item').length).toBe(0);
+        expect(screen.queryAllByTestId('item').length).toBe(0);
         expect(screen.getByTestId('no-questions')).toBeTruthy();
     });
 });

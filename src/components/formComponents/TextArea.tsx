@@ -4,7 +4,7 @@ import { ErrorMessage, StyledArea } from "./styles";
 
 export interface TextAreaProps extends InputProps {}
 
-export const TextArea = ({value, name, errorMessage, error, onChange, label}: TextAreaProps) => {
+export const TextArea = ({value, name, errorMessage, error, onChange, label, dataTestId}: TextAreaProps) => {
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         onChange({target: {
                 name,
@@ -16,6 +16,7 @@ export const TextArea = ({value, name, errorMessage, error, onChange, label}: Te
         <div>
             <p>{label}</p>
             <StyledArea
+                data-testid={dataTestId}
                 error={error}
                 rows={5}
                 value={value}

@@ -40,12 +40,28 @@ describe('<QuestionItem />', () => {
     });
 
     it('edit item', async () => {
+        wrapper = render(
+            <QuestionItem
+                item={item}
+                onEditItem={spyEdit}
+                onDeleteItem={spyDelete}
+            />
+        );
+
         const editButton: HTMLButtonElement = screen.getByTestId('edit');
         await userEvent.click(editButton);
         expect(spyEdit).toHaveBeenCalledWith(item.id);
     });
 
     it('delete item', async () => {
+        wrapper = render(
+            <QuestionItem
+                item={item}
+                onEditItem={spyEdit}
+                onDeleteItem={spyDelete}
+            />
+        );
+
         const deleteButton: HTMLButtonElement = screen.getByTestId('delete');
         await userEvent.click(deleteButton);
         expect(spyDelete).toHaveBeenCalledWith(item.id);
